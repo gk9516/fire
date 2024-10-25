@@ -4,60 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fire Detection</title>
+    <title>Fire Detection Dashboard</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></script>
-    <style>
-        /* Slider Styles */
-        .slider {
-            width: 100%;
-            height: 310px;
-            position: relative;
-            overflow: hidden;
-            background: rgb(0, 0, 32);
-        }
-
-        .slide-track {
-            display: flex;
-            width: calc(250px * 20);
-            animation: scroll 40s linear infinite;
-        }
-
-        .slide {
-            width: 250px;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 30px;
-        }
-
-        .slide img {
-            width: 250px;
-            height: 250px;
-            object-fit: contain;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-        }
-
-        .slide:hover img {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(calc(-250px * 10));
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -77,62 +27,45 @@
     </div>
 
     <main>
-        <!-- First Section -->
-        <section class="firstsection">
-            <div class="leftsection">
-                <div class="heading-container">
-                    <h1 class="main-heading">Hi, this is a website for fire detection</h1>
-                    <p class="sub-heading">Real-time monitoring for your safety</p>
-                </div>
-            </div>
-            <div class="rightsection">
-                <h2>ESP32 DHT Server</h2>
+        <!-- Fire Detection Data Section -->
+        <section class="data-section">
+            <div class="data-container">
+                <h2>Fire Detection Data</h2>
+
+                <!-- Displayed Data -->
                 <p>
                     <i class="fas fa-thermometer-half" style="color:#059e8a;"></i>
-                    <span class="dht-labels">Temperature</span>
+                    <span class="data-label">Temperature:</span>
                     <span id="temperature">--</span>
                     <sup class="units">&deg;C</sup>
                 </p>
                 <p>
                     <i class="fas fa-tint" style="color:#00add6;"></i>
-                    <span class="dht-labels">Humidity</span>
+                    <span class="data-label">Humidity:</span>
                     <span id="humidity">--</span>
                     <sup class="units">%</sup>
                 </p>
-
-                <!-- Fire Risk Visualization -->
-                <h3>Fire Risk Visualization</h3>
-                <div class="risk-indicator">
-                    <div id="riskMarker" class="risk-marker"></div>
-                </div>
-                <p id="riskLevel">Risk Level: <span id="riskText">Normal</span></p>
+                <p>
+                    <i class="fas fa-exclamation-triangle" style="color:#d9534f;"></i>
+                    <span class="data-label">Risk Level:</span>
+                    <span id="riskText">Normal</span>
+                </p>
+                <p id="lastUpdate">Last updated: --</p>
 
                 <button onclick="manualRefresh()" class="refresh-button">Refresh Data</button>
                 <p id="update-indicator" style="display: none;">Updating...</p>
-                <p id="lastUpdate"></p>
             </div>
         </section>
 
-        <!-- Image Slider -->
-        <div class="slider">
-            <div class="slide-track">
-                <!-- Image Slides -->
-                <div class="slide"><img src="images/final_architecture_diagram.png" alt="Architecture Diagram"></div>
-                <div class="slide"><img src="images/main.png" alt="Main Image"></div>
-                <!-- Duplicates to create seamless looping -->
-                <div class="slide"><img src="images/final_architecture_diagram.png" alt="Architecture Diagram"></div>
-                <div class="slide"><img src="images/main.png" alt="Architecture Diagram"></div>
-            </div>
-        </div>
-
         <hr>
+
         <!-- Description Section -->
         <section id="description" class="tile-section">
             <div class="tile">
                 <div class="tile-content">
                     <h1 class="gradient-heading" data-text="Description">Description</h1>
                     <p class="section-text">
-                        The Fire Detection system is designed to monitor and detect fire hazards in real-time...
+                        The Fire Detection system monitors temperature and humidity to detect potential fire hazards in real-time.
                     </p>
                 </div>
             </div>
@@ -193,8 +126,8 @@
                 .then(data => {
                     console.log('Data fetched from Google Sheets:', data);
 
-                    const temperature = data.temperature || "N/A"; // Adjust key if needed
-                    const humidity = data.humidity || "N/A";       // Adjust key if needed
+                    const temperature = data.temperature || "N/A";
+                    const humidity = data.humidity || "N/A";
 
                     if (temperature !== "N/A" && humidity !== "N/A") {
                         document.getElementById("temperature").textContent = temperature;
@@ -207,7 +140,7 @@
                 .catch(error => console.error('Error fetching data from Google Sheets:', error));
         }
 
-        // Update the risk indicator based on fetched data
+        // Update risk level based on fetched data
         function updateRiskIndicator(temperature, humidity) {
             const tempValue = parseFloat(temperature);
             const humidityValue = parseFloat(humidity);
@@ -237,10 +170,9 @@
             }
 
             document.getElementById("riskText").textContent = riskText;
-            document.getElementById("riskMarker").style.left = `${risk}%`;
         }
 
-        // Manual data refresh
+        // Manual refresh function
         function manualRefresh() {
             document.getElementById("update-indicator").style.display = "block";
             fetchDataFromGoogleSheets();
