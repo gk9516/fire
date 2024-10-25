@@ -9,20 +9,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></script>
     <style>
+        /* Slider Styles */
         .slider {
             width: 100%;
-            height: 310px; /* Adjust based on your image height + padding */
+            height: 310px;
             position: relative;
             overflow: hidden;
-            background: rgb(0, 0, 32); /* Matching your website's background color */
+            background: rgb(0, 0, 32);
         }
 
         .slide-track {
             display: flex;
-            width: calc(250px * 20); /* 250px per slide * 20 slides */
+            width: calc(250px * 20);
             animation: scroll 40s linear infinite;
         }
 
@@ -40,13 +40,13 @@
             height: 250px;
             object-fit: contain;
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border-radius: 10px; /* Rounded corners for the glow effect */
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5); /* Cyan glow */
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
         }
 
         .slide:hover img {
             transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8); /* Enhanced glow on hover */
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
         }
 
         @keyframes scroll {
@@ -54,7 +54,7 @@
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(calc(-250px * 10)); /* Half of the total width */
+                transform: translateX(calc(-250px * 10));
             }
         }
     </style>
@@ -90,13 +90,13 @@
                 <p>
                     <i class="fas fa-thermometer-half" style="color:#059e8a;"></i>
                     <span class="dht-labels">Temperature</span>
-                    <span id="temperature">36</span>
+                    <span id="temperature">--</span>
                     <sup class="units">&deg;C</sup>
                 </p>
                 <p>
                     <i class="fas fa-tint" style="color:#00add6;"></i>
                     <span class="dht-labels">Humidity</span>
-                    <span id="humidity">61</span>
+                    <span id="humidity">--</span>
                     <sup class="units">%</sup>
                 </p>
 
@@ -116,69 +116,12 @@
         <!-- Image Slider -->
         <div class="slider">
             <div class="slide-track">
-                <!-- First set of images -->
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Main Image">
-                </div>
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Architecture Diagram">
-                </div>
-                
-                <!-- Duplicate set of images to create the seamless loop -->
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Main Image">
-                </div>
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/final_architecture_diagram.png" alt="Architecture Diagram">
-                </div>
-                <div class="slide">
-                    <img src="images/main.png" alt="Architecture Diagram">
-                </div>
+                <!-- Image Slides -->
+                <div class="slide"><img src="images/final_architecture_diagram.png" alt="Architecture Diagram"></div>
+                <div class="slide"><img src="images/main.png" alt="Main Image"></div>
+                <!-- Duplicates to create seamless looping -->
+                <div class="slide"><img src="images/final_architecture_diagram.png" alt="Architecture Diagram"></div>
+                <div class="slide"><img src="images/main.png" alt="Architecture Diagram"></div>
             </div>
         </div>
 
@@ -189,46 +132,30 @@
                 <div class="tile-content">
                     <h1 class="gradient-heading" data-text="Description">Description</h1>
                     <p class="section-text">
-                        The Fire Detection system is designed to monitor and detect fire hazards in real-time. By
-                        leveraging
-                        advanced technologies such as thermal imaging, smoke detection, and sensor networks, this system
-                        aims
-                        to provide early warnings before fires spread. Additionally, this platform includes automated
-                        emergency
-                        services contact information to help streamline responses and save lives during critical
-                        situations.
-                        With constant monitoring and live alerts, users can take proactive measures to secure their
-                        premises.
-                        The system is highly adaptable, working in both residential and industrial settings, ensuring
-                        maximum
-                        safety.
+                        The Fire Detection system is designed to monitor and detect fire hazards in real-time...
                     </p>
                 </div>
             </div>
         </section>
 
         <hr>
-
         <!-- To Do Section -->
         <section id="todo" class="tile-section">
             <div class="tile">
                 <div class="tile-content">
                     <h1 class="gradient-heading" data-text="To Do">To Do</h1>
                     <ul class="section-text">
-                        <li>Stay Calm and Act Quickly: Keep calm and act decisively to avoid delays.</li>
-                        <li>Sound the Alarm: Alert others and call emergency services as soon as possible.</li>
-                        <li>Evacuate Immediately: Use the nearest safe exit and avoid elevators.</li>
-                        <li>Stay Low: If there's smoke, crawl on the ground to avoid inhaling toxic fumes.</li>
-                        <li>Don't Re-enter the Building: Once out, stay out and wait for emergency personnel to handle
-                            the
-                            situation.</li>
+                        <li>Stay Calm and Act Quickly</li>
+                        <li>Sound the Alarm</li>
+                        <li>Evacuate Immediately</li>
+                        <li>Stay Low</li>
+                        <li>Don't Re-enter the Building</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <hr>
-
         <!-- Emergency Numbers Section -->
         <section id="Emergency-Contact" class="tile-section">
             <div class="tile">
@@ -237,24 +164,12 @@
                     <div class="table-container">
                         <table class="styled-table colorful-table" width="1000px" border="1px">
                             <thead>
-                                <tr>
-                                    <th>GOVERNMENT BODY</th>
-                                    <th>NUMBER</th>
-                                </tr>
+                                <tr><th>GOVERNMENT BODY</th><th>NUMBER</th></tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>FIRE DEPARTMENT</td>
-                                    <td>101</td>
-                                </tr>
-                                <tr>
-                                    <td>POLICE</td>
-                                    <td>100</td>
-                                </tr>
-                                <tr>
-                                    <td>AMBULANCE</td>
-                                    <td>108</td>
-                                </tr>
+                                <tr><td>FIRE DEPARTMENT</td><td>101</td></tr>
+                                <tr><td>POLICE</td><td>100</td></tr>
+                                <tr><td>AMBULANCE</td><td>108</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -262,41 +177,52 @@
             </div>
         </section>
     </main>
+
     <script>
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz4D75EucRyuzg9QKhXnv_2lYtp7PPqqeDaM_8zR2MCTGrLdS5Rep_vlqvZdW2VjX-a/exec';
-    
+
+        // Fetch data from Google Sheets
         function fetchDataFromGoogleSheets() {
             fetch(GOOGLE_SHEETS_URL)
-                .then(response => response.json())
-                .then(data => {
-                    const temperature = data.temperature;  // Adjust key based on actual response structure
-                    const humidity = data.humidity;        // Adjust key based on actual response structure
-                    
-                    document.getElementById("temperature").textContent = temperature;
-                    document.getElementById("humidity").textContent = humidity;
-                    updateRiskIndicator(temperature, humidity);
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not ok, status: ${response.status}`);
+                    }
+                    return response.json();
                 })
-                .catch(error => console.error('Error fetching data:', error));
+                .then(data => {
+                    console.log('Data fetched from Google Sheets:', data);
+
+                    const temperature = data.temperature || "N/A"; // Adjust key if needed
+                    const humidity = data.humidity || "N/A";       // Adjust key if needed
+
+                    if (temperature !== "N/A" && humidity !== "N/A") {
+                        document.getElementById("temperature").textContent = temperature;
+                        document.getElementById("humidity").textContent = humidity;
+                        updateRiskIndicator(temperature, humidity);
+                    } else {
+                        console.error('Temperature or humidity data not found in response:', data);
+                    }
+                })
+                .catch(error => console.error('Error fetching data from Google Sheets:', error));
         }
-    
+
+        // Update the risk indicator based on fetched data
         function updateRiskIndicator(temperature, humidity) {
             const tempValue = parseFloat(temperature);
             const humidityValue = parseFloat(humidity);
-    
-            // Define thresholds
-            const highTempThreshold = 35;  // °C
-            const highHumidityThreshold = 70; // %
-            const lowHumidityThreshold = 30; // %
-    
+
+            const highTempThreshold = 35;
+            const highHumidityThreshold = 70;
+            const lowHumidityThreshold = 30;
+
             let risk = 0;
             let riskText = "Normal";
-    
-            // Calculate risk based on thresholds
+
             if (tempValue > highTempThreshold) risk += 50;
             if (humidityValue > highHumidityThreshold) risk += 25;
             if (humidityValue < lowHumidityThreshold) risk += 50;
-    
-            // Determine risk level
+
             if (risk >= 75) {
                 riskText = "High";
                 document.getElementById("riskText").style.color = 'red';
@@ -309,11 +235,12 @@
             } else {
                 document.getElementById("riskText").style.color = 'green';
             }
-    
+
             document.getElementById("riskText").textContent = riskText;
             document.getElementById("riskMarker").style.left = `${risk}%`;
         }
-    
+
+        // Manual data refresh
         function manualRefresh() {
             document.getElementById("update-indicator").style.display = "block";
             fetchDataFromGoogleSheets();
@@ -322,14 +249,13 @@
             }, 1000);
             document.getElementById("lastUpdate").textContent = "Last updated: " + new Date().toLocaleString();
         }
-    
+
         // Initial load
         manualRefresh();
-    
+
         // Automatic refresh every 10 seconds
-        setInterval(manualRefresh, 2000);
+        setInterval(manualRefresh, 10000);
     </script>
-    
 </body>
 
 </html>
