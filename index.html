@@ -4,118 +4,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fire Detection Dashboard</title>
+    <title>Fire Detection</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></script>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .data-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #dddddd;
+        }
+        th {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .refresh-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="navi-bar">
-        <nav id="navbar">
-            <span class="nav-logo" style="font-size: 1.7rem;">&#x1F525; Fire Alert</span>
-            <div class="right">
-                <ul>
-                    <li><a href="#" id="home-link"> Home</a></li>
-                    <li><a href="#description"> Description</a></li>
-                    <li><a href="metrics.html" target="_blank"> Metrics</a></li>
-                    <li><a href="#todo"> To Do</a></li>
-                    <li><a href="#Emergency-Contact"> Emergency Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <span class="nav-logo">&#x1F525; Fire Alert</span>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#description">Description</a></li>
+            <li><a href="#metrics">Metrics</a></li>
+            <li><a href="#todo">To Do</a></li>
+            <li><a href="#Emergency-Contact">Emergency Contact</a></li>
+        </ul>
+    </nav>
 
+    <!-- Main Content -->
     <main>
-        <!-- Fire Detection Data Section -->
-        <section class="data-section">
-            <div class="data-container">
-                <h2>Fire Detection Data</h2>
-
-                <!-- Displayed Data -->
-                <p>
-                    <i class="fas fa-thermometer-half" style="color:#059e8a;"></i>
-                    <span class="data-label">Temperature:</span>
-                    <span id="temperature">--</span>
-                    <sup class="units">&deg;C</sup>
-                </p>
-                <p>
-                    <i class="fas fa-tint" style="color:#00add6;"></i>
-                    <span class="data-label">Humidity:</span>
-                    <span id="humidity">--</span>
-                    <sup class="units">%</sup>
-                </p>
-                <p>
-                    <i class="fas fa-exclamation-triangle" style="color:#d9534f;"></i>
-                    <span class="data-label">Risk Level:</span>
-                    <span id="riskText">Normal</span>
-                </p>
-                <p id="lastUpdate">Last updated: --</p>
-
-                <button onclick="manualRefresh()" class="refresh-button">Refresh Data</button>
-                <p id="update-indicator" style="display: none;">Updating...</p>
-            </div>
+        <!-- Section to Display Data -->
+        <section id="data-section" class="data-container">
+            <h2>Fire Detection Data</h2>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Temperature (°C)</th>
+                        <th>Humidity (%)</th>
+                        <th>MQ2 Value</th>
+                        <th>Fire Percent (%)</th>
+                        <th>No Fire Percent (%)</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr><td colspan="5">Loading data...</td></tr>
+                </tbody>
+            </table>
+            <button class="refresh-button" onclick="fetchData()">Refresh Data</button>
         </section>
-
-        <hr>
 
         <!-- Description Section -->
-        <section id="description" class="tile-section">
-            <div class="tile">
-                <div class="tile-content">
-                    <h1 class="gradient-heading" data-text="Description">Description</h1>
-                    <p class="section-text">
-                        The Fire Detection system monitors temperature and humidity to detect potential fire hazards in real-time.
-                    </p>
-                </div>
-            </div>
+        <section id="description">
+            <h1>Description</h1>
+            <p>The Fire Detection system monitors real-time data...</p>
         </section>
 
-        <hr>
         <!-- To Do Section -->
-        <section id="todo" class="tile-section">
-            <div class="tile">
-                <div class="tile-content">
-                    <h1 class="gradient-heading" data-text="To Do">To Do</h1>
-                    <ul class="section-text">
-                        <li>Stay Calm and Act Quickly</li>
-                        <li>Sound the Alarm</li>
-                        <li>Evacuate Immediately</li>
-                        <li>Stay Low</li>
-                        <li>Don't Re-enter the Building</li>
-                    </ul>
-                </div>
-            </div>
+        <section id="todo">
+            <h1>To Do</h1>
+            <ul>
+                <li>Stay Calm and Act Quickly</li>
+                <li>Sound the Alarm</li>
+                <li>Evacuate Immediately</li>
+                <li>Stay Low</li>
+                <li>Don't Re-enter the Building</li>
+            </ul>
         </section>
 
-        <hr>
-        <!-- Emergency Numbers Section -->
-        <section id="Emergency-Contact" class="tile-section">
-            <div class="tile">
-                <div class="tile-content">
-                    <h1 class="gradient-heading" data-text="Emergency Contact">Emergency Contact</h1>
-                    <div class="table-container">
-                        <table class="styled-table colorful-table" width="1000px" border="1px">
-                            <thead>
-                                <tr><th>GOVERNMENT BODY</th><th>NUMBER</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td>FIRE DEPARTMENT</td><td>101</td></tr>
-                                <tr><td>POLICE</td><td>100</td></tr>
-                                <tr><td>AMBULANCE</td><td>108</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <!-- Emergency Contact Section -->
+        <section id="Emergency-Contact">
+            <h1>Emergency Contact</h1>
+            <table>
+                <thead>
+                    <tr><th>Service</th><th>Number</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Fire Department</td><td>101</td></tr>
+                    <tr><td>Police</td><td>100</td></tr>
+                    <tr><td>Ambulance</td><td>108</td></tr>
+                </tbody>
+            </table>
         </section>
     </main>
 
+    <!-- JavaScript to Fetch Data from Google Sheets -->
     <script>
-        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz4D75EucRyuzg9QKhXnv_2lYtp7PPqqeDaM_8zR2MCTGrLdS5Rep_vlqvZdW2VjX-a/exec';
+        const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
 
-        // Fetch data from Google Sheets
-        function fetchDataFromGoogleSheets() {
+        function fetchData() {
             fetch(GOOGLE_SHEETS_URL)
                 .then(response => {
                     if (!response.ok) {
@@ -124,69 +136,29 @@
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Data fetched from Google Sheets:', data);
+                    const tableBody = document.getElementById('tableBody');
+                    tableBody.innerHTML = '';
 
-                    const temperature = data.temperature || "N/A";
-                    const humidity = data.humidity || "N/A";
-
-                    if (temperature !== "N/A" && humidity !== "N/A") {
-                        document.getElementById("temperature").textContent = temperature;
-                        document.getElementById("humidity").textContent = humidity;
-                        updateRiskIndicator(temperature, humidity);
-                    } else {
-                        console.error('Temperature or humidity data not found in response:', data);
-                    }
+                    data.forEach(row => {
+                        const rowElement = document.createElement('tr');
+                        rowElement.innerHTML = `
+                            <td>${row.Temperature}</td>
+                            <td>${row.Humidity}</td>
+                            <td>${row['MQ2 Value']}</td>
+                            <td>${row['Fire Percent']}</td>
+                            <td>${row['No Fire Percent']}</td>
+                        `;
+                        tableBody.appendChild(rowElement);
+                    });
                 })
-                .catch(error => console.error('Error fetching data from Google Sheets:', error));
-        }
-
-        // Update risk level based on fetched data
-        function updateRiskIndicator(temperature, humidity) {
-            const tempValue = parseFloat(temperature);
-            const humidityValue = parseFloat(humidity);
-
-            const highTempThreshold = 35;
-            const highHumidityThreshold = 70;
-            const lowHumidityThreshold = 30;
-
-            let risk = 0;
-            let riskText = "Normal";
-
-            if (tempValue > highTempThreshold) risk += 50;
-            if (humidityValue > highHumidityThreshold) risk += 25;
-            if (humidityValue < lowHumidityThreshold) risk += 50;
-
-            if (risk >= 75) {
-                riskText = "High";
-                document.getElementById("riskText").style.color = 'red';
-            } else if (risk >= 50) {
-                riskText = "Moderate";
-                document.getElementById("riskText").style.color = 'orange';
-            } else if (risk >= 25) {
-                riskText = "Low";
-                document.getElementById("riskText").style.color = 'yellow';
-            } else {
-                document.getElementById("riskText").style.color = 'green';
-            }
-
-            document.getElementById("riskText").textContent = riskText;
-        }
-
-        // Manual refresh function
-        function manualRefresh() {
-            document.getElementById("update-indicator").style.display = "block";
-            fetchDataFromGoogleSheets();
-            setTimeout(() => {
-                document.getElementById("update-indicator").style.display = "none";
-            }, 1000);
-            document.getElementById("lastUpdate").textContent = "Last updated: " + new Date().toLocaleString();
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('tableBody').innerHTML = '<tr><td colspan="5">Error loading data.</td></tr>';
+                });
         }
 
         // Initial load
-        manualRefresh();
-
-        // Automatic refresh every 10 seconds
-        setInterval(manualRefresh, 10000);
+        fetchData();
     </script>
 </body>
 
